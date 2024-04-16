@@ -24,7 +24,7 @@ def getToken():
 
     return access_token
 
-def getImage(albumID, songName):
+def getImage(albumID):
     """
     Get the album art for the album with the given ID.
     """
@@ -40,7 +40,7 @@ def getImage(albumID, songName):
     data = response.json()
     imageUrl = data['images'][0]['url']
 
-    f = open(songName + '.jpg','wb')
+    f = open('./res/cover.jpg','wb')
     f.write(requests.get(imageUrl).content)
     f.close()
 

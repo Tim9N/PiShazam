@@ -1,0 +1,69 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: #D6DBD4;
+}
+
+#album-cover {
+    max-width: 240px;
+    border-radius: 5px;
+    border: 1px solid #003057;
+    margin: 20px;
+}
+
+#song-info {
+    flex: 1;
+    padding: 20px;
+    max-height: 350px;
+    max-width: 260px;
+    text-align: center;
+    overflow-y: auto; 
+    overflow-x: clip;
+}
+
+#song-lyrics {
+    flex: 2;
+    margin: 20px;
+    padding: 30px;
+    background-color: #003057;
+    border-radius: 5px;
+    color:#ffffff;
+    max-width: 50%;
+    max-height: 350px;
+    text-align: center;
+    white-space: pre-line;
+    overflow-y: auto; 
+    font-size: 1.2em;
+}
+
+/* Text styles */
+#song-title {
+    margin: 4px 0;
+    font-size: 2em;
+    color: #003057;
+}
+
+#song-artist, #song-album {
+    margin: 4px 0;
+    font-size: 1em;
+    color: #003057;
+}

@@ -13,6 +13,7 @@ import hmac
 import os
 import sys
 import time
+import json
 
 import requests
 
@@ -63,29 +64,43 @@ if (r['status']['code'] == 0):
     title = r['metadata']['music'][0]['title']
     artist = r['metadata']['music'][0]['artists'][0]['name']
     album = r['metadata']['music'][0]['album']['name']
-    print("Title: ", title)
-    print("Artist: ", artist)
-    print("Album: ", album)
-
 
     spotify_album_id = r['metadata']['music'][0]['external_metadata']['spotify']['album']['id']
     spotify_artist_id = r['metadata']['music'][0]['external_metadata']['spotify']['artists'][0]['id']
     spotify_track_id = r['metadata']['music'][0]['external_metadata']['spotify']['track']['id']
 
-    print("Spotify Album ID: ", spotify_album_id)
-    print("Spotify Artist ID: ", spotify_artist_id)
-    print("Spotify Track ID: ", spotify_track_id)
-
     isrc = s.getIsrc(spotify_track_id)
-    print("ISRC: ", isrc)
-
     lyrics = s.getLyrics(isrc)
-    print("Lyrics: ", lyrics)
+    
+    song_info = {
+        "title": title,
+        "artist": artist,
+        "album": album,
+        "spotify_album_id": spotify_album_id,
+        "spotify_artist_id": spotify_artist_id,
+        "spotify_track_id": spotify_track_id,
+        "isrc": isrc,
+        "lyrics": lyrics
+    }
 
-    s.getImage(spotify_album_id, title)
+    with open('./res/lyrics.txt', 'w') as file:
+        file.write(lyrics)
 
+    with open('./res/song_info.json', 'w') as json_file:
+        json.dump(song_info, json_file, indent=4, ensure_ascii=False)
+
+    s.getImage(spotify_album_id)
+
+    print("Title: ", title)
+    # print("Artist: ", artist)
+    # print("Album: ", album)
+
+    # print("Spotify Album ID: ", spotify_album_id)
+    # print("Spotify Artist ID: ", spotify_artist_id)
+    # print("Spotify Track ID: ", spotify_track_id)
+
+    # print("ISRC: ", isrc)
+    # print("Lyrics: ", lyrics)
 
 else:
     print("Error: ", r['status']['msg'])
-
-
